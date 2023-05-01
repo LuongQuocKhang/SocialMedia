@@ -7,6 +7,5 @@ namespace Post.Common.Events.Post
         public PostLikedEvent() : base(nameof(PostLikedEvent))
         {
         }
-        public Guid PostId { get; set; }
     }
 }

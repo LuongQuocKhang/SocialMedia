@@ -7,7 +7,5 @@ namespace Post.Common.Events.Post
         public PostRemovedEvent() : base(nameof(PostRemovedEvent))
         {
         }
-
-        public Guid PostId { get; set; }
     }
 }

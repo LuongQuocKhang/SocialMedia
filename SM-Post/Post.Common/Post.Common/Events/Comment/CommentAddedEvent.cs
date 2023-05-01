@@ -4,7 +4,7 @@ namespace Post.Common.Events.Comment
 {
     public class CommentAddedEvent : BaseEvent
     {
-        public CommentAddedEvent(string type) : base(nameof(CommentAddedEvent))
+        public CommentAddedEvent() : base(nameof(CommentAddedEvent))
         {
         }
         public Guid CommentId { get; set; }
