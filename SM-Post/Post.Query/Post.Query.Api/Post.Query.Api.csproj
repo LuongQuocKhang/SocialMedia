@@ -17,4 +17,8 @@
     <ProjectReference Include="..\Post.Query.Infrastructure\Post.Query.Infrastructure.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Controllers\" />
+  </ItemGroup>
+
 </Project>
