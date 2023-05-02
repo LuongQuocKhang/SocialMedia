@@ -8,13 +8,13 @@ using Post.Cmd.Application.Commands.Post.LikePostCommand;
 using Post.Cmd.Application.Commands.Post.NewPostCommand;
 using Post.Cmd.Domain.Aggregates;
 
-namespace Post.Cmd.Application.Commands
+namespace Post.Cmd.Application.Commands.Handlers.Post
 {
-    public class CommandHandler : ICommandHandler
+    public class PostCommandHandler : IPostCommandHandler
     {
         private readonly IEventSourcingHandler<PostAggregate> _eventSourcingHandler;
 
-        public CommandHandler(IEventSourcingHandler<PostAggregate> eventSourcingHandler)
+        public PostCommandHandler(IEventSourcingHandler<PostAggregate> eventSourcingHandler)
         {
             _eventSourcingHandler = eventSourcingHandler ?? throw new ArgumentNullException(nameof(eventSourcingHandler));
         }
@@ -32,7 +32,7 @@ namespace Post.Cmd.Application.Commands
         {
             var aggregate = await _eventSourcingHandler.GetByIdAsync(command.Id);
 
-            aggregate.EditComment(command.CommentId,command.Comment, command.Username);
+            aggregate.EditComment(command.CommentId, command.Comment, command.Username);
 
             await _eventSourcingHandler.SaveAsync(aggregate);
         }

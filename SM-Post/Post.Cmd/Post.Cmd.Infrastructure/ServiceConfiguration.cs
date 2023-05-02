@@ -3,10 +3,10 @@ using CQRS.Core.Handlers;
 using CQRS.Core.Infrastructure;
 using CQRS.Core.Producers;
 using Microsoft.Extensions.DependencyInjection;
-using Post.Cmd.Application.Commands;
 using Post.Cmd.Application.Commands.Comment.AddCommentCommand;
 using Post.Cmd.Application.Commands.Comment.EditCommentCommand;
 using Post.Cmd.Application.Commands.Comment.RemoveCommentComand;
+using Post.Cmd.Application.Commands.Handlers.Post;
 using Post.Cmd.Application.Commands.Message.EditMessageCommand;
 using Post.Cmd.Application.Commands.Post.DeletePostCommand;
 using Post.Cmd.Application.Commands.Post.LikePostCommand;
@@ -30,9 +30,9 @@ namespace Post.Cmd.Infrastructure
 
             services.AddScoped<IEventSourcingHandler<PostAggregate>, EventSourcingHandler>();
 
-            services.AddScoped<ICommandHandler, CommandHandler>();
+            services.AddScoped<IPostCommandHandler, PostCommandHandler>();
 
-            var commandHandler = services.BuildServiceProvider().GetRequiredService<ICommandHandler>();
+            var commandHandler = services.BuildServiceProvider().GetRequiredService<IPostCommandHandler>();
             var dispatcher = new CommandDispatcher();
 
             dispatcher.RegisterHandler<AddCommentCommand>(commandHandler.HandleAsync);

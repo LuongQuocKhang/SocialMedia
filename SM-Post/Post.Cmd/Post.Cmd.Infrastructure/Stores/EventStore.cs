@@ -5,11 +5,6 @@ using CQRS.Core.Infrastructure;
 using CQRS.Core.Producers;
 using Microsoft.Extensions.Configuration;
 using Post.Cmd.Domain.Aggregates;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Post.Cmd.Infrastructure.Stores
 {
