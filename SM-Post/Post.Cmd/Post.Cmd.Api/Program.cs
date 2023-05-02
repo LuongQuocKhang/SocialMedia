@@ -1,20 +1,12 @@
 using Post.Cmd.Infrastructure.Config;
 using Post.Cmd.Infrastructure;
-using Post.Cmd.Application.Commands;
-using Post.Cmd.Infrastructure.Dispatchers;
-using Post.Cmd.Application.Commands.Comment.AddCommentCommand;
-using Post.Cmd.Application.Commands.Comment.EditCommentCommand;
-using Post.Cmd.Application.Commands.Comment.RemoveCommentComand;
-using Post.Cmd.Application.Commands.Message.EditMessageCommand;
-using Post.Cmd.Application.Commands.Post.DeletePostCommand;
-using Post.Cmd.Application.Commands.Post.LikePostCommand;
-using Post.Cmd.Application.Commands.Post.NewPostCommand;
-using CQRS.Core.Infrastructure;
+using Confluent.Kafka;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
-builder.Services.Configure<MongoDbConfig>(builder.Configuration.GetSection("MongoDbConfig"));
+builder.Services.Configure<MongoDbConfig>(builder.Configuration.GetSection(nameof(MongoDbConfig)));
+builder.Services.Configure<ProducerConfig>(builder.Configuration.GetSection(nameof(ProducerConfig)));
 
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle

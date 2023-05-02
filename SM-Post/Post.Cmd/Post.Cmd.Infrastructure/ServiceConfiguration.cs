@@ -1,6 +1,7 @@
 ﻿using CQRS.Core.Domain;
 using CQRS.Core.Handlers;
 using CQRS.Core.Infrastructure;
+using CQRS.Core.Producers;
 using Microsoft.Extensions.DependencyInjection;
 using Post.Cmd.Application.Commands;
 using Post.Cmd.Application.Commands.Comment.AddCommentCommand;
@@ -13,6 +14,7 @@ using Post.Cmd.Application.Commands.Post.NewPostCommand;
 using Post.Cmd.Domain.Aggregates;
 using Post.Cmd.Infrastructure.Dispatchers;
 using Post.Cmd.Infrastructure.Handlers;
+using Post.Cmd.Infrastructure.Producers;
 using Post.Cmd.Infrastructure.Repositories;
 using Post.Cmd.Infrastructure.Stores;
 
@@ -24,12 +26,11 @@ namespace Post.Cmd.Infrastructure
         {
             services.AddScoped<IEventRepository, EventRepository>();
             services.AddScoped<IEventStore, EventStore>();
+            services.AddScoped<IEventProducer, EventProducer>();
 
             services.AddScoped<IEventSourcingHandler<PostAggregate>, EventSourcingHandler>();
 
             services.AddScoped<ICommandHandler, CommandHandler>();
-
-
 
             var commandHandler = services.BuildServiceProvider().GetRequiredService<ICommandHandler>();
             var dispatcher = new CommandDispatcher();
