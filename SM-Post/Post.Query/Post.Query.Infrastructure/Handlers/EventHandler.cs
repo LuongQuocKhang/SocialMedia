@@ -1,21 +1,17 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Post.Common.Events.Comment;
 using Post.Common.Events.Message;
 using Post.Common.Events.Post;
 using Post.Query.Domain.Entities;
-using Post.Query.Infrastructure.Repositories;
+using Post.Query.Domain.Repositories;
 
 namespace Post.Query.Infrastructure.Handlers
 {
     public class EventHandler : IEventHandler
     {
-        private readonly PostRepository _postRepository;
-        private readonly CommentRepository _commentRepository;
+        private readonly IPostRepository _postRepository;
+        private readonly ICommentRepository _commentRepository;
 
-        public EventHandler(PostRepository postRepository, CommentRepository commentRepository) 
+        public EventHandler(IPostRepository postRepository, ICommentRepository commentRepository) 
         {
             _postRepository = postRepository;
             _commentRepository = commentRepository;

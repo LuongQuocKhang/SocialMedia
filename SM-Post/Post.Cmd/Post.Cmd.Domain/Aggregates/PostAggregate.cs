@@ -59,8 +59,7 @@ namespace Post.Cmd.Domain.Aggregates
                 Id = id,
                 Author = author,
                 Message = message,
-                CreatedDate = DateTime.Now,
-                PostId = Guid.NewGuid(),
+                CreatedDate = DateTime.Now
             });
         }
 

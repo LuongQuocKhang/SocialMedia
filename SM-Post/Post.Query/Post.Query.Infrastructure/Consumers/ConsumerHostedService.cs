@@ -23,7 +23,7 @@ namespace Post.Query.Infrastructure.Consumers
             _logger.LogInformation("Event Consumer service is running.");
             using (IServiceScope scope = _serviceProvider.CreateScope())
             {
-                var eventConsumer = _serviceProvider.GetRequiredService<IEventConsumer>();
+                var eventConsumer = scope.ServiceProvider.GetRequiredService<IEventConsumer>();
                 var topic = _configuration["KAFKA_TOPIC"];
 
                 Task.Run(() => {

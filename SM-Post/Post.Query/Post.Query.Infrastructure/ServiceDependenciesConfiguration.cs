@@ -12,7 +12,7 @@ namespace Post.Query.Infrastructure
     {
         public static IServiceCollection AddServiceDependencies(this IServiceCollection services)
         {
-            services.AddScoped<IPostRepository,PostRepository>();
+            services.AddScoped<IPostRepository, PostRepository>();
             services.AddScoped<ICommentRepository,CommentRepository>();
 
             services.AddScoped<IEventHandler, Handlers.EventHandler>();

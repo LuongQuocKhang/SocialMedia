@@ -56,5 +56,13 @@
             "type": "coreclr",
             "request": "attach"
         }
+    ],
+    "compounds": [
+        {
+            "name": "Cmd/Query",
+            "configurations": [
+                ".NET Core Launch (web) Command", ".NET Core Launch (web) Query"
+            ]
+        }
     ]
 }

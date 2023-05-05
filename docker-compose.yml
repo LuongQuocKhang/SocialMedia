@@ -22,6 +22,7 @@ services:
       - ALLOW_PLAINTEXT_LISTENER=yes
       - KAFKA_LISTENERS=PLAINTEXT://:9092
       - KAFKA_ADVERTISED_LISTENERS=PLAINTEXT://localhost:9092
+      - enable_debug=true
     depends_on:
       - zookeeper
 
