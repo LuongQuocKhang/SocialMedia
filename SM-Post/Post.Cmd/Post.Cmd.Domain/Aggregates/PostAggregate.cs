@@ -108,6 +108,7 @@ namespace Post.Cmd.Domain.Aggregates
             RaiseEvent(new PostRemovedEvent()
             {
                 Id = _id,
+                CreatedDate = DateTime.Now
             });
         }
         public void Apply(PostRemovedEvent @event)
