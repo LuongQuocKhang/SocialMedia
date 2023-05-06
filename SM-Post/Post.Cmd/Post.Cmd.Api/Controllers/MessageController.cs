@@ -8,18 +8,18 @@ namespace Post.Cmd.Api.Controllers
 {
     [ApiController]
     [Route("api/v1/[controller]")]
-    public class EditMessageController : ControllerBase
+    public class MessageController : ControllerBase
     {
-        private readonly ILogger<EditMessageController> _logger;
+        private readonly ILogger<MessageController> _logger;
         private readonly ICommandDispatcher _commandDispatcher;
 
-        public EditMessageController(ILogger<EditMessageController> logger, ICommandDispatcher commandDispatcher)
+        public MessageController(ILogger<MessageController> logger, ICommandDispatcher commandDispatcher)
         {
             _logger = logger;
             _commandDispatcher = commandDispatcher;
         }
 
-        [HttpPut("{id}")]
+        [HttpPut("{postId}")]
         public async Task<ActionResult> EditMessageAsync(Guid postId, EditMessageCommand command)
         {
             try

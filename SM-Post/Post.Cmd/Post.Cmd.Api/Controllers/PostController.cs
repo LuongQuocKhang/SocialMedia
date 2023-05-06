@@ -1,6 +1,7 @@
 using CQRS.Core.Exceptions;
 using CQRS.Core.Infrastructure;
 using Microsoft.AspNetCore.Mvc;
+using Post.Cmd.Application.Commands.Post.DeletePostCommand;
 using Post.Cmd.Application.Commands.Post.LikePostCommand;
 using Post.Cmd.Application.Commands.Post.NewPostCommand;
 using Post.Common.DTOs;
@@ -20,7 +21,7 @@ namespace Post.Cmd.Api.Controllers
             _commandDispatcher = commandDispatcher;
         }
 
-        [HttpPost]
+        [HttpPost(Name = "Add New Post")]
         public async Task<ActionResult> NewPostAsync(NewPostCommand command)
         {
             var id = Guid.NewGuid();
@@ -58,18 +59,20 @@ namespace Post.Cmd.Api.Controllers
             }
         }
 
-        [HttpPut("{id}")]
-        public async Task<ActionResult> LikePostAsync(Guid postId, LikePostCommand command)
+        [HttpPut("{postId}")]
+        public async Task<ActionResult> LikePostAsync(Guid postId)
         {
             try
             {
-                command.Id = postId;
+                LikePostCommand command = new LikePostCommand() {
+                    Id = postId
+                };
                 await _commandDispatcher.SendAsync(command);
 
                 return StatusCode(StatusCodes.Status200OK, new EditMessageResponse()
                 {
                     Id = postId,
-                    Message = "Edit message request completed successfully!"
+                    Message = "Like Post request completed successfully!"
                 });
             }
             catch(AggregateNotFoundException exception)
@@ -89,6 +92,45 @@ namespace Post.Cmd.Api.Controllers
                 _logger.Log(LogLevel.Error, exception, SAFE_ERROR_MESSAGE);
 
                 return StatusCode(StatusCodes.Status500InternalServerError, new NewPostResponse()
+                {
+                    Id = postId,
+                    Message = SAFE_ERROR_MESSAGE
+                });
+            }
+        }
+    
+        [HttpDelete("{postId}")]
+        public async Task<ActionResult> DeletePostAsync(Guid postId, DeletePostCommand command) 
+        {
+            try
+            {
+                command.Id = postId;
+                
+                await _commandDispatcher.SendAsync(command);
+
+                return StatusCode(StatusCodes.Status200OK, new DeleteMessageResponse()
+                {
+                    Id = postId,
+                    Message = "Delete Post request completed successfully!"
+                });
+            }
+            catch(AggregateNotFoundException exception)
+            {
+                _logger.Log(LogLevel.Warning, exception, "Could not retrieve aggregate, client passed incorrect post ID targetting the aggregate!", new BaseResponse()
+                {
+                    Message = exception.Message
+                });
+                 return BadRequest(new BaseResponse()
+                {
+                    Message = exception.Message
+                });
+            }
+            catch (Exception exception)
+            {
+                const string SAFE_ERROR_MESSAGE = "Error while processing request to edit post message!";
+                _logger.Log(LogLevel.Error, exception, SAFE_ERROR_MESSAGE);
+
+                return StatusCode(StatusCodes.Status500InternalServerError, new DeleteMessageResponse()
                 {
                     Id = postId,
                     Message = SAFE_ERROR_MESSAGE

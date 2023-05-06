@@ -30,8 +30,7 @@ namespace Post.Cmd.Infrastructure.Stores
                 throw new AggregateNotFoundException("Incorrect Post Id provided!");
             }
 
-            return eventStream.OrderByDescending(x => x.Id).Select(x => x.EventData).ToList();
-
+            return eventStream.OrderBy(x => x.Version).Select(x => x.EventData).ToList();
         }
 
         public async Task SaveEventsAsync(Guid aggregateId, IEnumerable<BaseEvent> events, int expectedVersion)

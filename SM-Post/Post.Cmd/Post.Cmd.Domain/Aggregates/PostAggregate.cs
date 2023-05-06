@@ -169,7 +169,7 @@ namespace Post.Cmd.Domain.Aggregates
             {
                 Id = _id,
                 CreatedDate = DateTime.Now,
-                CommentId = Guid.NewGuid(),
+                CommentId = commentId,
                 Comment = comment,
                 Username = username
             });
@@ -199,7 +199,7 @@ namespace Post.Cmd.Domain.Aggregates
             {
                 Id = _id,
                 CreatedDate = DateTime.Now,
-                CommentId = Guid.NewGuid()
+                CommentId = commentId
             });
         }
 

@@ -1,8 +1,10 @@
 ﻿using CQRS.Core.Domain;
+using CQRS.Core.Events;
 using CQRS.Core.Handlers;
 using CQRS.Core.Infrastructure;
 using CQRS.Core.Producers;
 using Microsoft.Extensions.DependencyInjection;
+using MongoDB.Bson.Serialization;
 using Post.Cmd.Application.Commands.Comment.AddCommentCommand;
 using Post.Cmd.Application.Commands.Comment.EditCommentCommand;
 using Post.Cmd.Application.Commands.Comment.RemoveCommentComand;
@@ -17,6 +19,9 @@ using Post.Cmd.Infrastructure.Handlers;
 using Post.Cmd.Infrastructure.Producers;
 using Post.Cmd.Infrastructure.Repositories;
 using Post.Cmd.Infrastructure.Stores;
+using Post.Common.Events.Comment;
+using Post.Common.Events.Message;
+using Post.Common.Events.Post;
 
 namespace Post.Cmd.Infrastructure
 {
@@ -44,6 +49,15 @@ namespace Post.Cmd.Infrastructure
             dispatcher.RegisterHandler<NewPostCommand>(commandHandler.HandleAsync);
 
             services.AddSingleton<ICommandDispatcher>(_ => dispatcher);
+
+            BsonClassMap.RegisterClassMap<BaseEvent>();
+            BsonClassMap.RegisterClassMap<PostCreatedEvent>();
+            BsonClassMap.RegisterClassMap<MessageUpdatedEvent>();
+            BsonClassMap.RegisterClassMap<PostLikedEvent>();
+            BsonClassMap.RegisterClassMap<CommentAddedEvent>();
+            BsonClassMap.RegisterClassMap<CommentUpdatedEvent>();
+            BsonClassMap.RegisterClassMap<CommentRemovedEvent>();
+            BsonClassMap.RegisterClassMap<PostRemovedEvent>();
 
             return services;
         }
