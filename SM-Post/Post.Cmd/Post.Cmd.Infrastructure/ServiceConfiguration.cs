@@ -5,6 +5,7 @@ using CQRS.Core.Infrastructure;
 using CQRS.Core.Producers;
 using Microsoft.Extensions.DependencyInjection;
 using MongoDB.Bson.Serialization;
+using Post.Cmd.Application.Commands;
 using Post.Cmd.Application.Commands.Comment.AddCommentCommand;
 using Post.Cmd.Application.Commands.Comment.EditCommentCommand;
 using Post.Cmd.Application.Commands.Comment.RemoveCommentComand;
@@ -47,6 +48,7 @@ namespace Post.Cmd.Infrastructure
             dispatcher.RegisterHandler<DeletePostCommand>(commandHandler.HandleAsync);
             dispatcher.RegisterHandler<LikePostCommand>(commandHandler.HandleAsync);
             dispatcher.RegisterHandler<NewPostCommand>(commandHandler.HandleAsync);
+            dispatcher.RegisterHandler<RestoreReadDbCommand>(commandHandler.HandleAsync);
 
             services.AddSingleton<ICommandDispatcher>(_ => dispatcher);
 

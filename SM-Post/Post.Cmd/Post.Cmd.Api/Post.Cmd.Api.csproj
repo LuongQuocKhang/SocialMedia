@@ -21,8 +21,4 @@
     <ProjectReference Include="..\Post.Cmd.Infrastructure\Post.Cmd.Infrastructure.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Controllers\" />
-  </ItemGroup>
-
 </Project>

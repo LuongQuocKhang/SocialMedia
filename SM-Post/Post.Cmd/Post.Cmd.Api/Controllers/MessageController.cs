@@ -3,6 +3,7 @@ using CQRS.Core.Infrastructure;
 using Microsoft.AspNetCore.Mvc;
 using Post.Cmd.Application.Commands.Message.EditMessageCommand;
 using Post.Common.DTOs;
+using Post.Common.DTOs.CommandResponse;
 
 namespace Post.Cmd.Api.Controllers
 {

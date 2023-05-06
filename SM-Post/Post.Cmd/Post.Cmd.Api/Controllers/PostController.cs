@@ -5,6 +5,7 @@ using Post.Cmd.Application.Commands.Post.DeletePostCommand;
 using Post.Cmd.Application.Commands.Post.LikePostCommand;
 using Post.Cmd.Application.Commands.Post.NewPostCommand;
 using Post.Common.DTOs;
+using Post.Common.DTOs.CommandResponse;
 
 namespace Post.Cmd.Api.Controllers
 {

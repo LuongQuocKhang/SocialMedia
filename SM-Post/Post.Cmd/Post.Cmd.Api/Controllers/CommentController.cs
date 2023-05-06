@@ -8,6 +8,7 @@ using Post.Cmd.Application.Commands.Comment.AddCommentCommand;
 using Post.Cmd.Application.Commands.Comment.EditCommentCommand;
 using Post.Cmd.Application.Commands.Comment.RemoveCommentComand;
 using Post.Common.DTOs;
+using Post.Common.DTOs.CommandResponse;
 
 namespace Post.Cmd.Api.Controllers
 {

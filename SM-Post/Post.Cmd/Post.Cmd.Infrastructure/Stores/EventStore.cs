@@ -21,6 +21,21 @@ namespace Post.Cmd.Infrastructure.Stores
             _configuration = configuration ?? throw new ArgumentNullException(nameof(configuration));
         }
 
+        public async Task<List<Guid>> GetAggregateIdsAsync()
+        {
+            var eventStream = await _eventRepository.FindAllAggregates();
+
+            if (eventStream == null || !eventStream.Any())
+            {
+                throw new ArgumentNullException(nameof(eventStream), $"Could not retrive event stream from the event store");
+            }
+
+            return eventStream.OrderBy(x => x.Version)
+                            .Select(x => x.AggregateIdentifier)
+                            .Distinct()
+                            .ToList();
+        }
+
         public async Task<IEnumerable<BaseEvent>> GetEventsAsync(Guid aggregateId)
         {
             var eventStream = await _eventRepository.FindByAggregateId(aggregateId);

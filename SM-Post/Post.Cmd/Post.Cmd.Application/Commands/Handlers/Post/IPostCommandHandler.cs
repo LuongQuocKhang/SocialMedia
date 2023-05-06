@@ -17,5 +17,6 @@ namespace Post.Cmd.Application.Commands.Handlers.Post
         Task HandleAsync(DeletePostCommand command);
         Task HandleAsync(LikePostCommand command);
         Task HandleAsync(NewPostCommand command);
+        Task HandleAsync(RestoreReadDbCommand command);
     }
 }

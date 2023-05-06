@@ -78,5 +78,10 @@ namespace Post.Cmd.Application.Commands.Handlers.Post
             var aggregate = new PostAggregate(command.Id, command.Author, command.Message);
             await _eventSourcingHandler.SaveAsync(aggregate);
         }
+
+        public async Task HandleAsync(RestoreReadDbCommand command)
+        {
+            await _eventSourcingHandler.RepublishEventsAsync();
+        }
     }
 }

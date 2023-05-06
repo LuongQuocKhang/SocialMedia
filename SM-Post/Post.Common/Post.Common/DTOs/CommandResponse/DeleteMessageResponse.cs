@@ -1,4 +1,4 @@
-namespace Post.Common.DTOs
+namespace Post.Common.DTOs.CommandResponse
 {
     public class DeleteMessageResponse : BaseResponse
     {

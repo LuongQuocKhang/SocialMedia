@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace Post.Common.DTOs
+namespace Post.Common.DTOs.CommandResponse
 {
     public class EditMessageResponse : BaseResponse
     {
