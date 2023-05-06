@@ -1,6 +1,7 @@
 using Post.Query.Infrastructure;
 using Confluent.Kafka;
 using Post.Query.Infrastructure.Consumers;
+using Post.Query.Application;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -11,6 +12,7 @@ builder.Services.Configure<ConsumerConfig>(builder.Configuration.GetSection(name
 // Add DbContext 
 builder.Services.AddDatabaseContext(builder.Configuration.GetConnectionString("SqlServer"));
 
+builder.Services.AddInfrastructureDependencies();
 builder.Services.AddServiceDependencies();
 
 builder.Services.AddControllers();
